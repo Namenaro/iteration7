@@ -1,3 +1,5 @@
+from deviceA import DeviceA, DeviceA2
+
 import  numpy as np
 from numpy import linalg as LA
 
@@ -51,3 +53,15 @@ def get_center_top_bottom_of_X(X):
             if x[i]>top[i]:
                 top[i]=x[i]
     return center, top, bottom
+
+def make_deviceA_from_json(comlex_name, point_in_triplet, json_data, patch_len, lead):
+    X = get_all_patches_by_delin(comlex_name, point_in_triplet, json_data, patch_len, lead)
+    center, radius = get_center_and_radius_of_X(X)
+    deviceA = DeviceA(center, radius)
+    return deviceA
+
+def make_deviceA2_from_json(comlex_name, point_in_triplet, json_data, patch_len, lead):
+    X = get_all_patches_by_delin(comlex_name, point_in_triplet, json_data, patch_len, lead)
+    center, top, bottom = get_center_top_bottom_of_X(X)
+    deviceA2 = DeviceA2(bottom, top, center)
+    return deviceA2
