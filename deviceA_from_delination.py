@@ -30,7 +30,24 @@ def get_all_patches_by_delin(comlex_name, point_in_triplet, json_data, patch_len
 
 def get_center_and_radius_of_X(X):
     center = np.mean(X, axis=0)
-
+    radius = None
     for x in X:
         dist = LA.norm(center-x)
+        if radius is None:
+            radius = dist
+        else:
+            if dist>radius:
+                radius=dist
+    return center, radius
 
+def get_center_top_bottom_of_X(X):
+    center = np.mean(X, axis=0)
+    top = X[0]
+    bottom=X[0]
+    for i in range(len(top)):
+        for x in X:
+            if x[i]<bottom[i]:
+                bottom[i] = x[i]
+            if x[i]>top[i]:
+                top[i]=x[i]
+    return center, top, bottom
