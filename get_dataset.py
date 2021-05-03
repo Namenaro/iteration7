@@ -1,5 +1,6 @@
 import os
 import easygui
+import json
 
 def get_folder():
     return "C:\!mywork\datasets\dataset_instanses"
@@ -28,3 +29,7 @@ def get_part_path(num):
     folder = "C:\!mywork\datasets\BWR_data_schiller"
     filename = "data_part_"+str(num)+".json"
     return os.path.join(folder, filename)
+
+def load_from_file(file_path):
+    with open(file_path, 'r') as f:
+        return json.load(f)
