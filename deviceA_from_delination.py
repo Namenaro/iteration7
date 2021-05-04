@@ -1,4 +1,5 @@
 from deviceA import DeviceA, DeviceA2
+import copy
 
 import  numpy as np
 from numpy import linalg as LA
@@ -44,8 +45,8 @@ def get_center_and_radius_of_X(X):
 
 def get_center_top_bottom_of_X(X):
     center = np.mean(X, axis=0)
-    top = X[0]
-    bottom=X[0]
+    top = copy.deepcopy(X[0])
+    bottom=copy.deepcopy(X[0])
     for i in range(len(top)):
         for x in X:
             if x[i]<bottom[i]:

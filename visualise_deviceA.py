@@ -18,6 +18,8 @@ def apply_device_to_lead(signal, device, threshold):
 
 def visualise_device_on_json_one_lead(device, json_data, lead, threshold):
     num_plots = len(json_data.keys())
+    if num_plots>10:
+        num_plots=10
     fig, axs = plt.subplots(num_plots, sharey=True, sharex=True)
     fig.suptitle('device visualisation')
     i=0
@@ -29,5 +31,7 @@ def visualise_device_on_json_one_lead(device, json_data, lead, threshold):
         center_coords, activation_levels, _ = apply_device_to_lead(signal, device, threshold)
         axs[i].scatter(center_coords, activation_levels, alpha=0.5, c='red')
         i=i+1
+        if i == num_plots:
+            break
 
     plt.show()

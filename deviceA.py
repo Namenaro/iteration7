@@ -35,7 +35,7 @@ class DeviceA2:
         patch = signal[start:end]
 
         for i in range(self.patch_len):
-            if patch[i]>=self.top[i] and patch[i]<=self.bottom[i]:
+            if patch[i]>=self.top[i] or patch[i]<=self.bottom[i]:
                 return 0,None
         value = self.center - patch
         return 1, value
