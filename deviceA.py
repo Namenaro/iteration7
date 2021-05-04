@@ -6,10 +6,12 @@ class DeviceA:
         self.patch_len = len(center)
         self.radius = radius
 
-    def get_level_and_value_of_activation(self, signal, point):
-        if point<0 or point>len(signal)- self.patch_len -1:
+    def get_level_and_value_of_activation(self, signal, center_point):
+        start = center_point - int(self.patch_len / 2)
+        end = start + self.patch_len
+        if start <= 0 or end >= len(signal):
             return None,None
-        patch = signal[point:point+self.patch_len]
+        patch = signal[start:end]
         value = self.center - patch
         dist = LA.norm(value)
         if dist > self.radius:
@@ -25,10 +27,12 @@ class DeviceA2:
         self.bottom=bottom
         self.center = center
 
-    def get_level_and_value_of_activation(self, signal, point):
-        if point<0 or point>len(signal)- self.patch_len -1:
-            return None,None
-        patch = signal[point:point+self.patch_len]
+    def get_level_and_value_of_activation(self, signal, center_point):
+        start = center_point - int(self.patch_len / 2)
+        end = start + self.patch_len
+        if start <= 0 or end >= len(signal):
+            return None, None
+        patch = signal[start:end]
 
         for i in range(self.patch_len):
             if patch[i]>=self.top[i] and patch[i]<=self.bottom[i]:
