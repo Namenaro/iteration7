@@ -1,6 +1,8 @@
 from deviceA_from_delination import make_deviceA2_from_json, make_deviceA_from_json
 from visualise_deviceA import *
 from get_dataset import *
+from Au import *
+from u import U_slider
 
 def make_initial_deviceA():
     json_data = load_from_file(get_path_to_json_7_healthy())
@@ -24,6 +26,15 @@ def visualise_device_lat_inh(device):
     json_data = load_from_file(get_path_to_200())
     visualise_device_lateral_inhibition(device, json_data, lead, threshold, lateral_inh_vicinity)
 
+def make_u_slider_from_A(A):
+    u = U_slider(dx=20,lead="i",d_left=5,d_right=5,patch_len=5)
+    threshold = 0.7
+    lateral_inh_vicinity = 15
+    json_data = load_from_file(get_path_to_200())
+    result_patches, result_dxs, patients_ids = make_u_from_A(json_data, A, u, threshold, lateral_inh_vicinity)
+    print ("Au resuled in " + str(len(result_patches)))
+
 deviceA = make_initial_deviceA()
-visualise_device_raw(deviceA)
-visualise_device_lat_inh(deviceA)
+#visualise_device_raw(deviceA)
+#visualise_device_lat_inh(deviceA)
+make_u_slider_from_A(deviceA)
