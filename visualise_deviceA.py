@@ -1,4 +1,4 @@
-from deviceA_from_delination import get_lead_signal
+from utils import *
 from deviceA import DeviceA, DeviceA2
 import matplotlib.pyplot as plt
 
