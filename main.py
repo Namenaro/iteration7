@@ -1,5 +1,5 @@
 from deviceA_from_delination import make_deviceA2_from_json, make_deviceA_from_json
-from visualise_deviceA import visualise_device_on_json_one_lead
+from visualise_deviceA import *
 from get_dataset import *
 
 def make_initial_deviceA():
@@ -11,11 +11,19 @@ def make_initial_deviceA():
     deviceA = make_deviceA2_from_json(complex_name, point_in_triplet, json_data, patch_len, lead)
     return deviceA
 
-def visualise_device(device):
+def visualise_device_raw(device):
     lead = "i"
     threshold =0.7
     json_data = load_from_file(get_path_to_200())
-    visualise_device_on_json_one_lead(device, json_data, lead, threshold)
+    visualise_device_no_inhibition(device, json_data, lead, threshold)
+
+def visualise_device_lat_inh(device):
+    lead = "i"
+    threshold = 0.7
+    lateral_inh_vicinity = 15
+    json_data = load_from_file(get_path_to_200())
+    visualise_device_lateral_inhibition(device, json_data, lead, threshold, lateral_inh_vicinity)
 
 deviceA = make_initial_deviceA()
-visualise_device(deviceA)
+visualise_device_raw(deviceA)
+visualise_device_lat_inh(deviceA)
