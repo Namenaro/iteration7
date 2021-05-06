@@ -1,5 +1,6 @@
 from utils import *
 
+import numpy as np
 from numpy import linalg as LA
 
 class U_slider:
@@ -24,16 +25,21 @@ class U_slider:
         return dxs, patches
 
 class U_by_example:
-    def __init__(self, du, lead, d_left, d_right, example):
+    def __init__(self, du, lead, d_left, d_right, patch_len):
         self.du=du
         self.lead=lead
         self.d_left = d_left
         self.d_right = d_right
-        self.patch_len = len(example)
-        self.example = example
+        self.patch_len = patch_len
+
+    def init_example(self, json_node, center_point):
+        signal = get_lead_signal(json_node, self.lead)
+        patch = cut_patch(center_point, self.patch_len, signal)
+        self.example = patch
 
     def dist_to_example(self, patch):
-        return LA.norm(patch - self.example)
+
+        return LA.norm(np.array(patch) - np.array(self.example))
 
     def do(self, json_node, current_x):
         best_dx = None
