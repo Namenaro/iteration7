@@ -28,10 +28,10 @@ def visualise_device_lat_inh(device):
     visualise_device_lateral_inhibition(device, json_data, lead, threshold, lateral_inh_vicinity)
 
 def make_u_slider_from_A(A):
-    u = U_slider(dx=20,lead="i",d_left=5,d_right=5,patch_len=15)
+    u = U_slider(du=20,lead="i",d_left=5,d_right=5,patch_len=15)
     threshold = 0.7
     lateral_inh_vicinity = 15
-    json_data = load_from_file(get_path_to_200())
+    json_data = load_from_file(get_path_to_json_7_healthy())
     result_patches, result_dxs, patients_ids = make_u_from_A(json_data, A, u, threshold, lateral_inh_vicinity)
     print ("Au resulted in " + str(len(result_patches)))
     return result_patches, result_dxs, patients_ids

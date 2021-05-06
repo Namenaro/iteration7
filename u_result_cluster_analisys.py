@@ -6,14 +6,14 @@ import matplotlib.cm as cm
 import numpy as np
 
 def make_cluster_analisys(patches):
-    n_clusters=7
-    labels = make_KMEANs_clustering(patches, n_clusters)
-    make_silhouette(patches, labels, n_clusters)
+    n_clusters=15
+    clusterer = KMeans(n_clusters=n_clusters)
+    labels = clusterer.fit_predict(patches)
+    best_cluster_index = make_silhouette(patches, labels, n_clusters)
+    ideal = clusterer.cluster_centers_[best_cluster_index]
+    plt.plot(ideal)
+    plt.show()
 
-def make_KMEANs_clustering(patches, n_clusters):
-    clusterer = KMeans(n_clusters=n_clusters, random_state=10)
-    cluster_labels = clusterer.fit_predict(patches)
-    return cluster_labels
 
 def make_silhouette(patches, labels, n_clusters):
     silhouette_avg = silhouette_score(patches, labels)
@@ -47,5 +47,8 @@ def make_silhouette(patches, labels, n_clusters):
         plt.axvline(x=silhouette_avg, color="red", linestyle="--")
     print("clusters silh means max:")
     print (max(cluster_silhu_means))
+    best_i = cluster_silhu_means.index(max(cluster_silhu_means))
+    print("best cluster is " + str(best_i))
     plt.show()
+    return best_i
 
