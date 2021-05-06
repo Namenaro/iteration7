@@ -3,6 +3,7 @@ from visualise_deviceA import *
 from get_dataset import *
 from Au import *
 from u import U_slider
+from u_result_analisys import *
 
 def make_initial_deviceA():
     json_data = load_from_file(get_path_to_json_7_healthy())
@@ -32,9 +33,11 @@ def make_u_slider_from_A(A):
     lateral_inh_vicinity = 15
     json_data = load_from_file(get_path_to_200())
     result_patches, result_dxs, patients_ids = make_u_from_A(json_data, A, u, threshold, lateral_inh_vicinity)
-    print ("Au resuled in " + str(len(result_patches)))
+    print ("Au resulted in " + str(len(result_patches)))
+    return result_patches, result_dxs, patients_ids
 
 deviceA = make_initial_deviceA()
 #visualise_device_raw(deviceA)
 #visualise_device_lat_inh(deviceA)
-make_u_slider_from_A(deviceA)
+result_patches, result_dxs, patients_ids = make_u_slider_from_A(deviceA)
+make_clustering(result_patches, result_dxs, patients_ids)
