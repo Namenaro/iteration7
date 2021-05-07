@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-def make_cluster_analisys(patches):
-    n_clusters=12
+def make_cluster_analisys(patches, n_clusters=10):
     clusterer = KMeans(n_clusters=n_clusters)
     labels = clusterer.fit_predict(patches)
     best_cluster_index = make_silhouette(patches, labels, n_clusters)

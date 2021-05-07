@@ -4,6 +4,7 @@ from get_dataset import *
 from Au import make_u_from_A_by_example, make_u_from_A
 from u import U_slider, U_by_example
 from u_result_cluster_analisys import make_cluster_analisys
+from deviceA import DeviceB
 
 def make_initial_deviceA():
     json_data = load_from_file(get_path_to_json_7_healthy())
@@ -60,3 +61,9 @@ deviceA = make_initial_deviceA()
 #make_cluster_analisys(result_patches)
 
 result_patches, result_dxs, patients_ids = make_u_by_exmaple_from_A(deviceA)
+#make_cluster_analisys(result_patches)
+
+B = DeviceB(result_patches)
+result_patches, result_dxs, patients_ids = make_u_by_exmaple_from_A(B)
+B.show()
+
