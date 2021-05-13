@@ -3,7 +3,8 @@ import easygui
 import json
 
 def get_folder():
-    return "C:\!mywork\datasets\dataset_instanses"
+    #return "C:\!mywork\datasets\dataset_instanses"
+    return "/home/yana/ECG_DATA"
 
 def get_path_to_json_7_healthy():
     filename = '7_pacients_ideally_healthy_and_normal_axis.json'
@@ -33,3 +34,8 @@ def get_part_path(num):
 def load_from_file(file_path):
     with open(file_path, 'r') as f:
         return json.load(f)
+
+def get_path_to_json_1_healthy():
+    filename = 'one_patient_ideally_healthy.json'
+    return os.path.join(get_folder(), filename)
+

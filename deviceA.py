@@ -3,7 +3,7 @@ import numpy as np
 import copy
 import matplotlib.pyplot as plt
 
-class DeviceA:
+class DeviceR:
     def __init__(self, center, radius):
         self.center = center
         self.patch_len = len(center)
@@ -13,7 +13,7 @@ class DeviceA:
         start = center_point - int(self.patch_len / 2)
         end = start + self.patch_len
         if start <= 0 or end >= len(signal):
-            return None,None
+            return None, None
         patch = signal[start:end]
         value = self.center - patch
         dist = LA.norm(value)
@@ -23,7 +23,7 @@ class DeviceA:
         return level, value
 
 
-class DeviceA2:
+class DeviceA:
     def __init__(self, bottom, top, center):
         self.top=top
         self.patch_len = len(top)
@@ -42,6 +42,19 @@ class DeviceA2:
                 return 0,None
         value = self.center - patch
         return 1, value
+
+    def get_mean_gap(self):
+        gap = 0
+        for i in range(len(self.bottom)):
+            gap = gap + abs(self.bottom[i]-self.top[i])
+        return gap/len(self.bottom)
+
+
+    def show(self):
+        plt.plot(self.center)
+        plt.plot(self.top)
+        plt.plot(self.bottom)
+        plt.show()
 
 
 class DeviceB:
@@ -65,8 +78,8 @@ class DeviceB:
         patch = signal[start:end]
 
         for i in range(self.patch_len):
-            if patch[i] >= self.top[i] or patch[i]<=self.bottom[i]:
-                return 0,None
+            if patch[i] >= self.top[i] or patch[i] <= self.bottom[i]:
+                return 0, None
         value = self.center - patch
         return 1, value
 
@@ -75,3 +88,9 @@ class DeviceB:
         plt.plot(self.top)
         plt.plot(self.bottom)
         plt.show()
+
+    def get_mean_gap(self):
+        gap = 0
+        for i in range(len(self.bottom)):
+            gap = gap + abs(self.bottom[i]-self.top[i])
+        return gap/len(self.bottom)

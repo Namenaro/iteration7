@@ -1,5 +1,5 @@
 from utils import *
-from deviceA import DeviceA, DeviceA2
+from deviceA import DeviceR, DeviceA
 import matplotlib.pyplot as plt
 from applyA import applyA_to_json
 
