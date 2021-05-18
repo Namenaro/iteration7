@@ -38,10 +38,10 @@ class U_by_example:
         self.example = patch
 
     def dist_to_example(self, patch):
-
+        diff = np.abs(np.array(patch) - np.array(self.example))
         #return LA.norm(np.array(patch) - np.array(self.example))
         #return np.amax(np.abs(np.array(patch) - np.array(self.example)))#
-        return np.mean(np.abs(np.array(patch) - np.array(self.example)))
+        return np.mean(diff)
 
     def do(self, json_node, current_x):
         best_dx = None

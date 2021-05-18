@@ -24,11 +24,12 @@ class DeviceR:
 
 
 class DeviceA:
-    def __init__(self, bottom, top, center):
-        self.top=top
+    def __init__(self, bottom, top, center, name):
+        self.top = top
         self.patch_len = len(top)
-        self.bottom=bottom
+        self.bottom = bottom
         self.center = center
+        self.name = name
 
     def get_level_and_value_of_activation(self, signal, center_point):
         start = center_point - int(self.patch_len / 2)
@@ -58,7 +59,8 @@ class DeviceA:
 
 
 class DeviceB:
-    def __init__(self, patches):
+    def __init__(self, patches, name):
+        self.name = name
         self.patch_len = len(patches[0])
         self.center = np.mean(patches, axis=0)
         self.top = copy.deepcopy(patches[0])

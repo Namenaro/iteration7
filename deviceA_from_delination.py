@@ -55,5 +55,5 @@ def make_deviceA_from_json(comlex_name, point_in_triplet, json_data, patch_len, 
 def make_deviceA2_from_json(comlex_name, point_in_triplet, json_data, patch_len, lead):
     X = get_all_patches_by_delin(comlex_name, point_in_triplet, json_data, patch_len, lead)
     center, top, bottom = get_center_top_bottom_of_X(X)
-    deviceA2 = DeviceA(bottom, top, center)
+    deviceA2 = DeviceA(bottom, top, center, "initial device")
     return deviceA2
